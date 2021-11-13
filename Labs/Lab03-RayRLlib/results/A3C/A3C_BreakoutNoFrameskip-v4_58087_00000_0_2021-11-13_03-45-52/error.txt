@@ -1,0 +1,91 @@
+Failure # 1 (occurred at 2021-11-13_03-45-59)
+Traceback (most recent call last):
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/tune/trial_runner.py", line 718, in _process_trial
+    results = self.trial_executor.fetch_result(trial)
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/tune/ray_trial_executor.py", line 688, in fetch_result
+    result = ray.get(trial_future[0], timeout=DEFAULT_GET_TIMEOUT)
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/_private/client_mode_hook.py", line 62, in wrapper
+    return func(*args, **kwargs)
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/worker.py", line 1496, in get
+    raise value
+ray.exceptions.RayActorError: The actor died because of an error raised in its creation task, [36mray::A3C.__init__()[39m (pid=16318, ip=192.168.1.8)
+  File "python/ray/_raylet.pyx", line 501, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 451, in ray._raylet.execute_task.function_executor
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/_private/function_manager.py", line 563, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/rllib/agents/trainer_template.py", line 123, in __init__
+    Trainer.__init__(self, config, env, logger_creator)
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/rllib/agents/trainer.py", line 548, in __init__
+    super().__init__(config, logger_creator)
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/tune/trainable.py", line 98, in __init__
+    self.setup(copy.deepcopy(self.config))
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/rllib/agents/trainer.py", line 709, in setup
+    self._init(self.config, self.env_creator)
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/rllib/agents/trainer_template.py", line 150, in _init
+    self.workers = self._make_workers(
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/rllib/agents/trainer.py", line 791, in _make_workers
+    return WorkerSet(
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/rllib/evaluation/worker_set.py", line 81, in __init__
+    remote_spaces = ray.get(self.remote_workers(
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/_private/client_mode_hook.py", line 62, in wrapper
+    return func(*args, **kwargs)
+ray.exceptions.RayActorError: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=16343, ip=192.168.1.8)
+ModuleNotFoundError: No module named 'atari_py'
+
+During handling of the above exception, another exception occurred:
+
+[36mray::RolloutWorker.__init__()[39m (pid=16343, ip=192.168.1.8)
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/rllib/env/utils.py", line 46, in gym_env_creator
+    return gym.make(env_descriptor, **env_context)
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/gym/envs/registration.py", line 184, in make
+    return registry.make(id, **kwargs)
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/gym/envs/registration.py", line 106, in make
+    env = spec.make(**kwargs)
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/gym/envs/registration.py", line 75, in make
+    cls = load(self.entry_point)
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/gym/envs/registration.py", line 18, in load
+    mod = importlib.import_module(mod_name)
+  File "/home/werikcyano/miniconda3/envs/lab03/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/gym/envs/atari/__init__.py", line 1, in <module>
+    from gym.envs.atari.atari_env import AtariEnv
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/gym/envs/atari/atari_env.py", line 11, in <module>
+    raise error.DependencyNotInstalled(
+gym.error.DependencyNotInstalled: No module named 'atari_py'. (HINT: you can install Atari dependencies by running 'pip install gym[atari]'.)
+
+During handling of the above exception, another exception occurred:
+
+[36mray::RolloutWorker.__init__()[39m (pid=16343, ip=192.168.1.8)
+  File "python/ray/_raylet.pyx", line 490, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 497, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 501, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 451, in ray._raylet.execute_task.function_executor
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/_private/function_manager.py", line 563, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/rllib/evaluation/rollout_worker.py", line 384, in __init__
+    self.env = _validate_env(env_creator(env_context))
+  File "/home/werikcyano/.local/lib/python3.8/site-packages/ray/rllib/env/utils.py", line 66, in gym_env_creator
+    raise gym.error.Error(error_msg)
+gym.error.Error: The env string you provided ('BreakoutNoFrameskip-v4') is:
+a) Not a supported/installed environment.
+b) Not a tune-registered environment creator.
+c) Not a valid env class string.
+
+Try one of the following:
+a) For Atari support: `pip install gym[atari] atari_py`.
+   For VizDoom support: Install VizDoom
+   (https://github.com/mwydmuch/ViZDoom/blob/master/doc/Building.md) and
+   `pip install vizdoomgym`.
+   For PyBullet support: `pip install pybullet pybullet_envs`.
+b) To register your custom env, do `from ray import tune;
+   tune.register('[name]', lambda cfg: [return env obj from here using cfg])`.
+   Then in your config, do `config['env'] = [name]`.
+c) Make sure you provide a fully qualified classpath, e.g.:
+   `ray.rllib.examples.env.repeat_after_me_env.RepeatAfterMeEnv`
+
