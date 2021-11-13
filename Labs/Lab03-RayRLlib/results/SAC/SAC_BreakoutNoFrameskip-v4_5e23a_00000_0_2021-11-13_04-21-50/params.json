@@ -1,0 +1,8 @@
+{
+  "env": "BreakoutNoFrameskip-v4",
+  "framework": "torch",
+  "log_level": "INFO",
+  "num_envs_per_worker": 2,
+  "num_gpus": 1,
+  "num_workers": 1
+}
